@@ -7,6 +7,8 @@ class BoardVM extends ChangeNotifier {
   int clickNumber = 0;
   List<String> btnsContent = ['', '', '', '', '', '', '', '', ''];
   bool endGame = false;
+  Offset p1 = const Offset(-10, -10);
+  Offset p2 = const Offset(-10, -10);
   void whichPlayerNow(int btnIndex, BuildContext context) {
     if (btnsContent[btnIndex] == '' && !endGame) {
       if (clickNumber % 2 == 0) {
@@ -84,13 +86,37 @@ class BoardVM extends ChangeNotifier {
 
   checkWinner(BuildContext context) {
     if (checkEquality(context, 0, 1, 2)) {
+      p1 = const Offset(0, 60);
+      p2 = const Offset(350, 60);
+      notifyListeners();
     } else if (checkEquality(context, 3, 4, 5)) {
+      p1 = const Offset(0, 190);
+      p2 = const Offset(350, 190);
+      notifyListeners();
     } else if (checkEquality(context, 6, 7, 8)) {
+      p1 = const Offset(0, 320);
+      p2 = const Offset(350, 320);
+      notifyListeners();
     } else if (checkEquality(context, 0, 3, 6)) {
+      p1 = const Offset(55, 0);
+      p2 = const Offset(55, 500);
+      notifyListeners();
     } else if (checkEquality(context, 1, 4, 7)) {
+      p1 = const Offset(180, 0);
+      p2 = const Offset(180, 500);
+      notifyListeners();
     } else if (checkEquality(context, 2, 5, 8)) {
+      p1 = const Offset(300, 0);
+      p2 = const Offset(300, 500);
+      notifyListeners();
     } else if (checkEquality(context, 0, 4, 8)) {
+      p1 = const Offset(350, 390);
+      p2 = const Offset(0, 0);
+      notifyListeners();
     } else if (checkEquality(context, 2, 4, 6)) {
+      p1 = const Offset(0, 390);
+      p2 = const Offset(350, 0);
+      notifyListeners();
     } else if (!btnsContent.contains('')) {
       resultDialog(context, "Draw");
     }
@@ -100,6 +126,9 @@ class BoardVM extends ChangeNotifier {
     clickNumber = 0;
     btnsContent = ['', '', '', '', '', '', '', '', ''];
     endGame = false;
+    p1 = const Offset(-10, -10);
+    p2 = const Offset(-10, -10);
+
     notifyListeners();
   }
 }

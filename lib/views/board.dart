@@ -86,21 +86,30 @@ class GameBoard extends StatelessWidget {
       borderRadius: BorderRadius.circular(25),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: -10),
-        child: Container(
-            color: const Color.fromARGB(50, 255, 255, 255),
-            width: SizeConf.screenWidth * .9,
-            child: GridView.builder(
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisExtent: 130,
-                    mainAxisSpacing: 3,
-                    crossAxisSpacing: 5,
-                    crossAxisCount: 3),
-                itemCount: 9,
-                itemBuilder: (context, index) => boardBtn(
-                    provider.btnsContent[index], provider, index, context))),
+        child: Stack(
+          children: [
+            Container(
+                color: const Color.fromARGB(50, 255, 255, 255),
+                width: SizeConf.screenWidth * .9,
+                child: GridView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent: 130,
+                            mainAxisSpacing: 3,
+                            crossAxisSpacing: 5,
+                            crossAxisCount: 3),
+                    itemCount: 9,
+                    itemBuilder: (context, index) => boardBtn(
+                        provider.btnsContent[index],
+                        provider,
+                        index,
+                        context))),
+            CustomPaint(painter: MyPainter(provider: provider)),
+          ],
+        ),
       ),
     );
   }
@@ -118,5 +127,31 @@ class GameBoard extends StatelessWidget {
           provider.resetGame();
         },
         child: Text("Reset Game", style: MyThemeData.whiteTs));
+  }
+}
+
+class MyPainter extends CustomPainter {
+  BoardVM provider;
+  MyPainter({required this.provider});
+  @override
+  void paint(Canvas canvas, Size size) {
+    //0 4 8 => 350 390 origin 0 0
+    // 2 4 6 => 0 390 orgin 350 0
+    //1 2 3 => 0 60 - 350 60
+    //4 5 6 => 0 190 - 350 190
+    //7 8 9 => 0 320 - 350 320
+//0 3 6 => 60 0 - 60 500
+//1 4 7  => 180 0 - 180 500
+////2 5 8  => 300 0 - 300 500
+
+    var paint = Paint()
+      ..color = Colors.white
+      ..strokeWidth = 5;
+    canvas.drawLine(provider.p1, provider.p2, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }
