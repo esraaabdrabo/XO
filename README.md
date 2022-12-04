@@ -1,7 +1,7 @@
-Tic tac toi game 
+
 Coming features : 
 To connect with firebase real time database in order to making this game onling game .
-empty board 
+
 ![Screenshot_20221204_134741](https://user-images.githubusercontent.com/91227030/205488706-1ecd08e3-1fef-4ae7-a31f-f6f09497881e.jpg)
 ![Screenshot_20221204_134833](https://user-images.githubusercontent.com/91227030/205488724-06d3f5e1-b665-455c-b7b3-619d0896c43a.jpg)
 we have a winner 🏆
