@@ -9,14 +9,19 @@ abstract class MyThemeData {
   static var yellowColor = const Color.fromARGB(255, 224, 244, 136);
   static var greenColor = const Color.fromARGB(255, 38, 200, 82);
 ////////////////////font style////////////////////////////
-  static var whiteTs = GoogleFonts.recursive(
-    textStyle: const TextStyle(fontSize: 25, color: Colors.white, shadows: [
-      BoxShadow(
-          offset: Offset(
-            -2,
-            2,
-          ),
-          blurRadius: 2)
-    ]),
-  );
+  static whiteTs(BuildContext context) {
+    return GoogleFonts.recursive(
+      textStyle: TextStyle(
+          fontSize: MediaQuery.of(context).size.height * .035,
+          color: Colors.white,
+          shadows: const[
+            BoxShadow(
+                offset: Offset(
+                  -2,
+                  2,
+                ),
+                blurRadius: 2)
+          ]),
+    );
+  }
 }

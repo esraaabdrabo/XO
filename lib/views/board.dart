@@ -29,10 +29,10 @@ class GameBoard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     board(provider),
-                    const SizedBox(
-                      width: 25,
+                    SizedBox(
+                      width: SizeConf.screenWidth * .05,
                     ),
-                    newGameBtn(provider)
+                    newGameBtn(provider, context)
                   ],
                 )
               ],
@@ -49,7 +49,7 @@ class GameBoard extends StatelessWidget {
                     const SizedBox(
                       height: 25,
                     ),
-                    newGameBtn(provider)
+                    newGameBtn(provider, context)
                   ],
                 )
               ],
@@ -60,6 +60,7 @@ class GameBoard extends StatelessWidget {
 
   boardBtn(
       String content, BoardVM provider, int btnIndex, BuildContext context) {
+    SizeConf(context);
     return InkWell(
       onTap: () {
         provider.whichPlayerNow(btnIndex, context);
@@ -70,7 +71,7 @@ class GameBoard extends StatelessWidget {
         child: Text(
           content,
           style: GoogleFonts.andika(
-              fontSize: 50,
+              fontSize: SizeConf.screenHeight * .04,
               shadows: [
                 const BoxShadow(
                     offset: Offset(-3, 3), color: Color.fromARGB(129, 0, 0, 0))
@@ -114,7 +115,7 @@ class GameBoard extends StatelessWidget {
     );
   }
 
-  newGameBtn(BoardVM provider) {
+  newGameBtn(BoardVM provider, BuildContext context) {
     return MaterialButton(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
         shape: RoundedRectangleBorder(
@@ -126,7 +127,7 @@ class GameBoard extends StatelessWidget {
         onPressed: () {
           provider.resetGame();
         },
-        child: Text("Reset Game", style: MyThemeData.whiteTs));
+        child: Text("Reset Game", style: MyThemeData.whiteTs(context)));
   }
 }
 

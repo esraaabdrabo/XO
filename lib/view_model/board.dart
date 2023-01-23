@@ -79,31 +79,32 @@ class BoardVM extends ChangeNotifier {
           content: Text(
             message,
             textAlign: TextAlign.center,
-            style: MyThemeData.whiteTs,
+            style: MyThemeData.whiteTs(context),
           )),
     );
   }
 
   checkWinner(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     if (checkEquality(context, 0, 1, 2)) {
       p1 = const Offset(0, 60);
-      p2 = const Offset(350, 60);
+      p2 = Offset(width, 60);
       notifyListeners();
     } else if (checkEquality(context, 3, 4, 5)) {
       p1 = const Offset(0, 190);
-      p2 = const Offset(350, 190);
+      p2 = Offset(width, 190);
       notifyListeners();
     } else if (checkEquality(context, 6, 7, 8)) {
       p1 = const Offset(0, 320);
-      p2 = const Offset(350, 320);
+      p2 = Offset(width, 320);
       notifyListeners();
     } else if (checkEquality(context, 0, 3, 6)) {
-      p1 = const Offset(55, 0);
-      p2 = const Offset(55, 500);
+      p1 = Offset(width * .072, 0);
+      p2 = Offset(width * .072, width);
       notifyListeners();
     } else if (checkEquality(context, 1, 4, 7)) {
-      p1 = const Offset(180, 0);
-      p2 = const Offset(180, 500);
+      p1 = Offset(width * .222, 0);
+      p2 = Offset(width * .222, 500);
       notifyListeners();
     } else if (checkEquality(context, 2, 5, 8)) {
       p1 = const Offset(300, 0);
